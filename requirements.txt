@@ -1,0 +1,9 @@
+Flask
+flask-cors
+util  # Add other dependencies as needed
+joblib
+numpy
+opencv-python
+flask
+flask-cors
+pywt
