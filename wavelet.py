@@ -1,25 +1,15 @@
 import numpy as np
-import pywt
+import scipy.signal as signal
 import cv2
 
-def w2d(img, mode='haar', level=1):
-    imArray = img
-    #Datatype conversions
-    #convert to grayscale
-    imArray = cv2.cvtColor( imArray,cv2.COLOR_RGB2GRAY )
-    #convert to float
-    imArray =  np.float32(imArray)
-    imArray /= 255;
-    # compute coefficients
-    coeffs=pywt.wavedec2(imArray, mode, level=level)
+def w2d_scipy(img, level=1):
+    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    img_float = np.float32(img_gray) / 255.0
 
-    #Process Coefficients
-    coeffs_H=list(coeffs)
-    coeffs_H[0] *= 0;
+    # Apply a simple wavelet transform using scipy (using DWT from signal)
+    coeffs = signal.cwt(img_float, signal.ricker, np.arange(1, level + 1))
 
-    # reconstruction
-    imArray_H=pywt.waverec2(coeffs_H, mode);
-    imArray_H *= 255;
-    imArray_H =  np.uint8(imArray_H)
-
-    return imArray_H
+    # Process and scale coefficients as needed
+    processed_img = np.abs(coeffs).mean(axis=0)  # Example processing
+    processed_img *= 255
+    return np.uint8(processed_img)
