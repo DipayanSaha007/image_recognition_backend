@@ -2,7 +2,7 @@ import numpy as np
 import scipy.signal as signal
 import cv2
 
-def w2d_scipy(img, level=1):
+def w2d(img, level=1):
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     img_float = np.float32(img_gray) / 255.0
 
