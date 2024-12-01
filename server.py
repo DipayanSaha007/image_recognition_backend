@@ -4,7 +4,7 @@ import util
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://image-recognition-liard.vercel.app/"])
 
 @app.route('/classify_image', methods=['POST'])
 def classify_image():
