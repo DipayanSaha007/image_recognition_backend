@@ -19,8 +19,8 @@ def w2d(img, level=1):
     return np.uint8(processed_img)
 
 # Usage example:
-img = cv2.imread('your_image.jpg')  # Replace with your actual image
-processed_img = w2d(img)
-cv2.imshow("Processed Image", processed_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# img = cv2.imread('your_image.jpg')  # Replace with your actual image
+# processed_img = w2d(img)
+# cv2.imshow("Processed Image", processed_img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
