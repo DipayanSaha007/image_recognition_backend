@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import util
 import os
+from PIL import Image
+from io import BytesIO
+import base64  # Make sure to import the base64 module
 
 app = Flask(__name__)
 CORS(app, origins=["https://image-recognition-liard.vercel.app"])
@@ -22,7 +25,7 @@ def classify_image():
     try:
         # Decode the base64 image data
         image_data = image_data.split(',')[1]  # Remove the "data:image/png;base64," part
-        image_data = base64.b64decode(image_data)
+        image_data = base64.b64decode(image_data)  # Decode the image data
 
         # Convert the binary data to an image
         image = Image.open(BytesIO(image_data))
