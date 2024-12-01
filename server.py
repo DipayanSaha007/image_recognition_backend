@@ -19,9 +19,20 @@ def classify_image():
     if not image_data:
         return jsonify({"error": "No image_data provided"}), 400
 
-    response = jsonify(util.classify_image(image_data))
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    try:
+        # Decode the base64 image data
+        image_data = image_data.split(',')[1]  # Remove the "data:image/png;base64," part
+        image_data = base64.b64decode(image_data)
+
+        # Convert the binary data to an image
+        image = Image.open(BytesIO(image_data))
+        
+        # Now you can use the image (e.g., classify it using your model)
+        response = jsonify(util.classify_image(image))
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Sports Celebrity Image Classification")
