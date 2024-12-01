@@ -1,3 +1,18 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import util
+import os
+from PIL import Image
+from io import BytesIO
+import base64  # Make sure this is imported
+
+app = Flask(__name__)
+CORS(app, origins=["https://image-recognition-liard.vercel.app"])
+
+@app.route('/')
+def home():
+    return 'Welcome to the Sports Celebrity Image Classification API'
+
 @app.route('/classify_image', methods=['POST'])
 def classify_image():
     data = request.get_json()
@@ -27,3 +42,10 @@ def classify_image():
         return response
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+if __name__ == "__main__":
+    print("Starting Python Flask Server For Sports Celebrity Image Classification")
+    util.load_saved_artifacts()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
