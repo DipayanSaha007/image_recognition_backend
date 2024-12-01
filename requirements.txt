@@ -5,8 +5,8 @@ numpy==1.23.5
 opencv-python-headless==4.5.5.64
 # scipy==1.5.4  # Uncommented version for compatibility with scikit-learn 0.24.1
 scikit-learn==0.24.2  # Latest compatible version of scikit-learn for numpy 1.23.x
-# setuptools>=58.0.0
-# wheel>=0.36.0
-# cython>=0.29.24
-# build>=0.7.0
-# matplotlib==3.7.0
+setuptools>=58.0.0
+wheel>=0.36.0
+cython>=0.29.24
+build>=0.7.0
+matplotlib==3.7.0
