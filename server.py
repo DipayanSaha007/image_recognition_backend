@@ -4,7 +4,7 @@ import util
 import os
 
 app = Flask(__name__)
-CORS(app, origins=["https://image-recognition-liard.vercel.app/"])
+CORS(app, origins=["https://image-recognition-liard.vercel.app"])
 
 @app.route('/')
 def home():
@@ -12,7 +12,10 @@ def home():
 
 @app.route('/classify_image', methods=['POST'])
 def classify_image():
-    image_data = request.form.get('image_data')
+    # Use get_json() to retrieve JSON data from the request
+    data = request.get_json()
+    image_data = data.get('image_data')  # Retrieve image data
+
     if not image_data:
         return jsonify({"error": "No image_data provided"}), 400
 
